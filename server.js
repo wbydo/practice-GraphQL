@@ -3,13 +3,33 @@ const graphqlHTTP = require('express-graphql')
 const { buildSchema } = require('graphql')
 
 const schema = buildSchema(`
-  type Query {
+  type Member {
     name: String
+    gender: String
+  }
+
+  type Query {
+    members: [Member]
   }
 `)
 
+const members = [
+  {
+    name: 'tarou',
+    gender: 'man'
+  },
+  {
+    name: 'hanako',
+    gender: 'woman'
+  },
+  {
+    name: 'yoshiko',
+    gender: 'woman'
+  }
+]
+
 const root = {
-  name: () => 'tarou'
+  members: () => members
 }
 
 const app = express()
