@@ -1,17 +1,32 @@
 const express = require('express')
 const graphqlHTTP = require('express-graphql')
-const { buildSchema } = require('graphql')
+const {
+  GraphQLObjectType,
+  GraphQLString,
+  GraphQLList,
+  GraphQLSchema
+} = require('graphql')
 
-const schema = buildSchema(`
-  type Member {
-    name: String
-    gender: String
+const Member = new GraphQLObjectType({
+  name: 'Member',
+  fields: {
+    name: { type: GraphQLString },
+    gender: { type: GraphQLString }
   }
+})
 
-  type Query {
-    members(name: String, gender: String): [Member]
+const Query = new GraphQLObjectType({
+  name: 'Query',
+  fields: {
+    members: {
+      type: new GraphQLList(Member),
+      args: {
+        name: { type: GraphQLString },
+        gender: { type: GraphQLString }
+      }
+    }
   }
-`)
+})
 
 const members = [
   {
@@ -38,6 +53,8 @@ const root = {
     }
   }
 }
+
+const schema = new GraphQLSchema({query: Query});
 
 const app = express()
 app.use('/graphql', graphqlHTTP({
