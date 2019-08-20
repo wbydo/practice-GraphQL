@@ -9,7 +9,7 @@ const schema = buildSchema(`
   }
 
   type Query {
-    members: [Member]
+    members(name: String, gender: String): [Member]
   }
 `)
 
@@ -29,7 +29,14 @@ const members = [
 ]
 
 const root = {
-  members: () => members
+  members: (search) => {
+    const item = Object.keys(search)
+    if (item.length === 0) {
+      return members
+    } else {
+      return members.filter(member => member[item[0]] === search[item[0]])
+    }
+  }
 }
 
 const app = express()
