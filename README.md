@@ -9,7 +9,7 @@
 ### 参考
 - [Constructing Types | Advanced Guides](https://graphql.org/graphql-js/constructing-types/)
 - >これは完全に上述のGraphQLサーバーの実装次第です。
-  - [GraphQLを使って実装してみよう - Qiita](https://qiita.com/haradakunihiko/items/a91a66e35031212023e3)
+  >> [GraphQLを使って実装してみよう - Qiita](https://qiita.com/haradakunihiko/items/a91a66e35031212023e3)
 
 ### 感想
 ↓の意味がわかった。
