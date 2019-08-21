@@ -24,3 +24,5 @@ express-graphqlをApollo Serverに代替する
 - [Apollo+Expressで始めるGraphQL超入門 ~ GraphQLをざっくり理解する - Qiita](https://qiita.com/zonomaa/items/5de4b14dcd839db5f148)
 - ナナメ読みしたところrootValueとresolverはそのまま置き換えてよさそう（凝ったことをする場合を除く）
   - ソース: [graphql を実行しながら GraphQLSchema と resolver、rootValue まわりの評価の仕組みを考える - きみはねこみたいなにゃんにゃんなまほう](http://lightbulbcat.hatenablog.com/entry/2018/01/27/003623#rootValue-%E3%81%AA%E3%81%97%E3%81%A7%E5%8B%95%E3%81%8B%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B)
+- expressとの組み合わせ方。最新版
+  - [Migrating to v2.0 - Apollo Docs](https://www.apollographql.com/docs/apollo-server/migration-two-dot/#stand-alone)
