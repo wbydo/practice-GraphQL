@@ -15,3 +15,10 @@
 ↓の意味がわかった。
 > GraphQLSchema インスタンスを直接コンストラクトする表現。 resolve 定義など何でもできますが、手作業では書きたくないですね。
 >> [GraphQL の色々なスキーマ表現について - GraphQL Schema Language や schema.json - きみはねこみたいなにゃんにゃんなまほう](http://lightbulbcat.hatenablog.com/entry/2018/02/18/000135)
+
+## phase3
+express-graphqlをApollo Serverに代替する
+
+### 参考
+- [Express - Apollo Docs](https://www.apollographql.com/docs/graphql-subscriptions/express/#gatsby-focus-wrapper)
+- [Apollo+Expressで始めるGraphQL超入門 ~ GraphQLをざっくり理解する - Qiita](https://qiita.com/zonomaa/items/5de4b14dcd839db5f148)
