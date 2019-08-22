@@ -1,10 +1,11 @@
 const express = require('express')
-const { ApolloServer } = require('apollo-server-express');
+const { ApolloServer, makeExecutableSchema } = require('apollo-server-express');
 const {
   GraphQLObjectType,
   GraphQLString,
   GraphQLList,
-  GraphQLSchema
+  GraphQLSchema,
+  printSchema
 } = require('graphql')
 
 const Member = new GraphQLObjectType({
@@ -20,10 +21,10 @@ const Query = new GraphQLObjectType({
   fields: {
     members: {
       type: new GraphQLList(Member),
-      args: {
-        name: { type: GraphQLString },
-        gender: { type: GraphQLString }
-      }
+      // args: {
+      //   name: { type: GraphQLString },
+      //   gender: { type: GraphQLString }
+      // }
     }
   }
 })
@@ -43,24 +44,24 @@ const members = [
   }
 ]
 
-const rootValues = {
+const resolvers = {
   Query: {
-    members: (search) => {
-      console.log(search)
-      const item = Object.keys(search)
-      if (item.length === 0) {
-        return members
-      } else {
-        return members.filter(member => member[item[0]] === search[item[0]])
-      }
+    members: () => {
+      console.log('hoge')
+      return members
     }
   }
 }
 
 const schema = new GraphQLSchema({query: Query});
 
+const executableSchema = makeExecutableSchema({
+  typeDefs: printSchema(schema),
+  resolvers
+})
+
 const app = express()
-const server = new ApolloServer({ schema, resolvers: rootValues });
+const server = new ApolloServer({ schema: executableSchema });
 
 server.applyMiddleware({ app, path: '/graphql' });
 
