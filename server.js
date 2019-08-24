@@ -31,7 +31,6 @@ const resolvers = {
   Query: {
     members: (_, args, ___, ____) => {
       const item = Object.keys(args)
-      console.log(item)
       if (item.length === 0) {
         return members
       } else {
