@@ -1,32 +1,17 @@
 const express = require('express')
-const { ApolloServer } = require('apollo-server-express');
-const {
-  GraphQLObjectType,
-  GraphQLString,
-  GraphQLList,
-  GraphQLSchema
-} = require('graphql')
+const graphqlHTTP = require('express-graphql')
+const { buildSchema } = require('graphql')
 
-const Member = new GraphQLObjectType({
-  name: 'Member',
-  fields: {
-    name: { type: GraphQLString },
-    gender: { type: GraphQLString }
+const schema = buildSchema(`
+  type Member {
+    name: String
+    gender: String
   }
-})
 
-const Query = new GraphQLObjectType({
-  name: 'Query',
-  fields: {
-    members: {
-      type: new GraphQLList(Member),
-      args: {
-        name: { type: GraphQLString },
-        gender: { type: GraphQLString }
-      }
-    }
+  type Query {
+    members(name: String, gender: String): [Member]
   }
-})
+`)
 
 const members = [
   {
@@ -43,27 +28,23 @@ const members = [
   }
 ]
 
-const rootValues = {
-  Query: {
-    members: (search) => {
-      console.log(search)
-      const item = Object.keys(search)
-      if (item.length === 0) {
-        return members
-      } else {
-        return members.filter(member => member[item[0]] === search[item[0]])
-      }
+const root = {
+  members: (search) => {
+    const item = Object.keys(search)
+    if (item.length === 0) {
+      return members
+    } else {
+      return members.filter(member => member[item[0]] === search[item[0]])
     }
   }
 }
 
-const schema = new GraphQLSchema({query: Query});
-
 const app = express()
-const server = new ApolloServer({ schema, resolvers: rootValues });
-
-server.applyMiddleware({ app, path: '/graphql' });
-
+app.use('/graphql', graphqlHTTP({
+  schema: schema,
+  rootValue: root,
+  graphiql: true  // ブラウザにGraphiQLを表示したい場合true。falseならjsonが返される
+}))
 app.listen(8080, () => {
   console.log('Now browse to localhost:8080/graphql')
 })

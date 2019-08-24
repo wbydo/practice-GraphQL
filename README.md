@@ -17,7 +17,8 @@
 >> [GraphQL の色々なスキーマ表現について - GraphQL Schema Language や schema.json - きみはねこみたいなにゃんにゃんなまほう](http://lightbulbcat.hatenablog.com/entry/2018/02/18/000135)
 
 ## phase3
-express-graphqlをApollo Serverに代替する
+- express-graphqlをApollo Serverに代替する
+- `GraphQLSchema`関数がapolloと合わないのでphase2の変更をリセット
 
 ### 参考
 - [Express - Apollo Docs](https://www.apollographql.com/docs/graphql-subscriptions/express/#gatsby-focus-wrapper)
